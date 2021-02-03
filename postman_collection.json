@@ -1,0 +1,321 @@
+{
+	"info": {
+		"_postman_id": "fec70c3e-647b-4201-861d-2e9ae8407e9f",
+		"name": "Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cee",
+			"item": [
+				{
+					"name": "Bulk",
+					"request": {
+						"auth": {
+							"type": "awsv4",
+							"awsv4": [
+								{
+									"key": "region",
+									"value": "{{region}}",
+									"type": "string"
+								},
+								{
+									"key": "secretKey",
+									"value": "{{SecretAccessKey}}",
+									"type": "string"
+								},
+								{
+									"key": "accessKey",
+									"value": "{{AccessKeyId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"name\": \"BAR_EN_101\",\r\n    \"version\": \"2020-10\",\r\n    \"metadata\": {\r\n        \"dfa\": {\r\n            \"zone_climatique\": {\r\n                \"H1\": \"\\\\App\\\\Patterns\\\\PatternC\",\r\n                \"H2\": \"\\\\App\\\\Patterns\\\\PatternC\",\r\n                \"H3\": \"\\\\App\\\\Patterns\\\\PatternC\"\r\n            }\r\n        },\r\n        \"mapping\": {\r\n            \"field1\": \"zone_climatique\",\r\n            \"field2\": \"surface_isolant\"\r\n        }\r\n    },\r\n    \"attributes\": {\r\n        \"zone_climatique\": {\r\n            \"hint\": \"string\",\r\n            \"values\": [\"H1\", \"H2\", \"H3\"]\r\n        },\r\n        \"surface_isolant\": {\r\n            \"hint\": \"number\"\r\n        }\r\n    },\r\n    \"zone_climatique\": {\r\n        \"H1\": 1700,\r\n        \"H2\": 1400,\r\n        \"H3\": 900\r\n    }\r\n},\r\n{\r\n    \"name\": \"BAR_EN_102\",\r\n    \"version\": \"2020-10\",\r\n    \"metadata\": {\r\n        \"dfa\": {\r\n            \"zone_climatique\": {\r\n                \"H1\": \"\\\\App\\\\Patterns\\\\PatternD\",\r\n                \"H2\": \"\\\\App\\\\Patterns\\\\PatternD\",\r\n                \"H3\": \"\\\\App\\\\Patterns\\\\PatternD\"\r\n            }\r\n        },\r\n        \"mapping\": {\r\n            \"field1\": \"zone_climatique\",\r\n            \"field2\": \"energie_chauffage\",\r\n            \"field3\": \"surface_isolant\"\r\n        }\r\n    },\r\n    \"attributes\": {\r\n        \"zone_climatique\": {\r\n            \"hint\": \"string\",\r\n            \"values\": [\"H1\", \"H2\", \"H3\"]\r\n        },\r\n        \"energie_chauffage\": {\r\n            \"hint\": \"string\",\r\n            \"values\": [\"electricite\", \"combustible\"]\r\n        },\r\n        \"surface_isolant\": {\r\n            \"hint\": \"number\"\r\n        }\r\n    },\r\n    \"zone_climatique\": {\r\n        \"H1\": {\r\n            \"electricite\": 2400,\r\n            \"combustible\": 3800\r\n        },\r\n        \"H2\": {\r\n            \"electricite\": 2000,\r\n            \"combustible\": 3100\r\n        },\r\n        \"H3\": {\r\n            \"electricite\": 1300,\r\n            \"combustible\": 2100\r\n        }\r\n    }\r\n},\r\n{\r\n    \"name\": \"BAR_EN_103\",\r\n    \"version\": \"2020-10\",\r\n    \"metadata\": {\r\n        \"dfa\": {\r\n            \"zone_climatique\": {\r\n                \"H1\": \"\\\\App\\\\Patterns\\\\PatternC\",\r\n                \"H2\": \"\\\\App\\\\Patterns\\\\PatternC\",\r\n                \"H3\": \"\\\\App\\\\Patterns\\\\PatternC\"\r\n            }\r\n        },\r\n        \"mapping\": {\r\n            \"field1\": \"zone_climatique\",\r\n            \"field2\": \"surface_isolant\"\r\n        }\r\n    },\r\n    \"attributes\": {\r\n        \"zone_climatique\": {\r\n            \"hint\": \"string\",\r\n            \"values\": [\"H1\", \"H2\", \"H3\"]\r\n        },\r\n        \"surface_isolant\": {\r\n            \"hint\": \"number\"\r\n        }\r\n    },\r\n    \"zone_climatique\": {\r\n        \"H1\": 1600,\r\n        \"H2\": 1300,\r\n        \"H3\": 900\r\n    }\r\n},\r\n{\r\n    \"name\": \"BAR_TH_104\",\r\n    \"version\": \"2020-10\",\r\n    \"metadata\": {\r\n        \"dfa\": {\r\n            \"type_logement\": {\r\n                \"maison\": \"\\\\App\\\\Patterns\\\\PatternA\",\r\n                \"appartement\": \"\\\\App\\\\Patterns\\\\PatternA\"\r\n            }\r\n        },\r\n        \"mapping\": {\r\n            \"field1\": \"type_logement\",\r\n            \"field2\": \"efficacite_energetique\",\r\n            \"field3\": \"zone_climatique\",\r\n            \"field4\": \"surface_chauffee\"\r\n        }\r\n    },\r\n    \"attributes\": {\r\n        \"type_logement\": {\r\n            \"hint\": \"string\",\r\n            \"values\": [\"appartement\", \"maison\"]\r\n        },\r\n        \"surface_habitable\": {\r\n            \"hint\": \"number\"\r\n        },\r\n        \"zone_climatique\": {\r\n            \"hint\": \"string\",\r\n            \"values\": [\"H1\", \"H2\", \"H3\"]\r\n        },\r\n        \"surface_chauffee\": {\r\n            \"hint\": \"number\"\r\n        }\r\n    },\r\n    \"appartement\": {\r\n        \"operation_1\": {\r\n            \"^(10[2-9])$\": {\r\n                \"H1\": 24500,\r\n                \"H2\": 20100,\r\n                \"H3\": 13400\r\n            },\r\n            \"^(11[0-9])$\": {\r\n                \"H1\": 32200,\r\n                \"H2\": 26400,\r\n                \"H3\": 17600\r\n            },\r\n            \"^(1[2-8][0-9]|19[0-9]|[2-9][0-9]{2}|1000)$\": {\r\n                \"H1\": 39700,\r\n                \"H2\": 32500,\r\n                \"H3\": 21700\r\n            }\r\n        },\r\n        \"operation_2\": {\r\n            \"^([0-9]|[12][0-9]|3[0-4])$\": 0.5,\r\n            \"^(3[5-9]|[45][0-9])$\": 0.7,\r\n            \"^(6[0-9])$\": 1,\r\n            \"^(7[0-9]|8[0-9])$\": 1.2,\r\n            \"^(9[0-9]|10[0-9])$\": 1.5,\r\n            \"^(1[12][0-9]|130)$\": 1.9,\r\n            \"^(13[1-9]|1[4-9][0-9]|[2-9][0-9]{2}|1000)$\": 2.5\r\n        }\r\n    },\r\n    \"maison\": {\r\n        \"operation_1\": {\r\n            \"^(10[2-9])$\": {\r\n                \"H1\": 52700,\r\n                \"H2\": 43100,\r\n                \"H3\": 28700\r\n            },\r\n            \"^(11[0-9])$\": {\r\n                \"H1\": 66400,\r\n                \"H2\": 54400,\r\n                \"H3\": 36200\r\n            },\r\n            \"^(1[2-8][0-9]|19[0-9]|[2-9][0-9]{2}|1000)$\": {\r\n                \"H1\": 79000,\r\n                \"H2\": 65400,\r\n                \"H3\": 43600\r\n            }\r\n        },\r\n        \"operation_2\": {\r\n            \"^([0-9]|[1-5][0-9]|6[0-9])$\": 0.5,\r\n            \"^(7[0-9]|8[0-9])$\": 0.7,\r\n            \"^(9[0-9]|10[0-9])$\": 1,\r\n            \"^(1[12][0-9]|130)$\": 1.1,\r\n            \"^(13[1-9]|1[4-9][0-9]|[2-9][0-9]{2}|1000)$\": 1.6\r\n        }\r\n    }\r\n},\r\n{\r\n    \"name\": \"BAR_TH_106\",\r\n    \"version\": \"2020-10\",\r\n    \"metadata\": {\r\n        \"dfa\": {\r\n            \"type_logement\": {\r\n                \"maison\": \"\\\\App\\\\Patterns\\\\PatternA\",\r\n                \"appartement\": \"\\\\App\\\\Patterns\\\\PatternD\"\r\n            }\r\n        },\r\n        \"mapping\": {\r\n            \"field1\": \"type_logement\",\r\n            \"field2\": \"zone_climatique\",\r\n            \"field4\": \"surface_chauffee\"\r\n        }\r\n    },\r\n    \"attributes\": {\r\n        \"type_logement\": {\r\n            \"hint\": \"string\",\r\n            \"values\": [\"appartement\", \"maison\"]\r\n        },\r\n        \"surface_habitable\": {\r\n            \"hint\": \"number\"\r\n        },\r\n        \"zone_climatique\": {\r\n            \"hint\": \"string\",\r\n            \"values\": [\"H1\", \"H2\", \"H3\"]\r\n        },\r\n        \"surface_chauffee\": {\r\n            \"hint\": \"number\"\r\n        }\r\n    },\r\n    \"appartement\": {\r\n        \"operation_1\": {\r\n            \"^(10[2-9])$\": {\r\n                \"H1\": 24500,\r\n                \"H2\": 20100,\r\n                \"H3\": 13400\r\n            },\r\n            \"^(11[0-9])$\": {\r\n                \"H1\": 32200,\r\n                \"H2\": 26400,\r\n                \"H3\": 17600\r\n            },\r\n            \"^(1[2-8][0-9]|19[0-9]|[2-9][0-9]{2}|1000)$\": {\r\n                \"H1\": 39700,\r\n                \"H2\": 32500,\r\n                \"H3\": 21700\r\n            }\r\n        },\r\n        \"operation_2\": {\r\n            \"^([0-9]|[12][0-9]|3[0-4])$\": 0.5,\r\n            \"^(3[5-9]|[45][0-9])$\": 0.7,\r\n            \"^(6[0-9])$\": 1,\r\n            \"^(7[0-9]|8[0-9])$\": 1.2,\r\n            \"^(9[0-9]|10[0-9])$\": 1.5,\r\n            \"^(1[12][0-9]|130)$\": 1.9,\r\n            \"^(13[1-9]|1[4-9][0-9]|[2-9][0-9]{2}|1000)$\": 2.5\r\n        }\r\n    },\r\n    \"maison\": {\r\n        \"operation_1\": {\r\n            \"^(10[2-9])$\": {\r\n                \"H1\": 52700,\r\n                \"H2\": 43100,\r\n                \"H3\": 28700\r\n            },\r\n            \"^(11[0-9])$\": {\r\n                \"H1\": 66400,\r\n                \"H2\": 54400,\r\n                \"H3\": 36200\r\n            },\r\n            \"^(1[2-8][0-9]|19[0-9]|[2-9][0-9]{2}|1000)$\": {\r\n                \"H1\": 79000,\r\n                \"H2\": 65400,\r\n                \"H3\": 43600\r\n            }\r\n        },\r\n        \"operation_2\": {\r\n            \"^([0-9]|[1-5][0-9]|6[0-9])$\": 0.5,\r\n            \"^(7[0-9]|8[0-9])$\": 0.7,\r\n            \"^(9[0-9]|10[0-9])$\": 1,\r\n            \"^(1[12][0-9]|130)$\": 1.1,\r\n            \"^(13[1-9]|1[4-9][0-9]|[2-9][0-9]{2}|1000)$\": 1.6\r\n        }\r\n    }\r\n}]"
+						},
+						"url": {
+							"raw": "http://{{url_cee}}/cee/bulk",
+							"protocol": "http",
+							"host": [
+								"{{url_cee}}"
+							],
+							"path": [
+								"cee",
+								"bulk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Cee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "33e07088-2f84-4392-a3ef-6520a01d57a0",
+								"exec": [
+									"// Get name + version\r",
+									"var data = JSON.parse(request.data);\r",
+									"postman.setEnvironmentVariable(\"cee_sheet_name\", data.name);\r",
+									"postman.setEnvironmentVariable(\"cee_sheet_version\", data.version);\r",
+									"tests[\"id = \" + data.name] = true; \r",
+									"tests[\"id = \" + data.version] = true; \r",
+									"\r",
+									"// Test status\r",
+									"pm.test(\"Create a new cee sheet - test status\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test content\r",
+									"pm.test(\"Create a new cee sheet - test content\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('@metadata');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "awsv4",
+							"awsv4": [
+								{
+									"key": "region",
+									"value": "{{region}}",
+									"type": "string"
+								},
+								{
+									"key": "secretKey",
+									"value": "{{SecretAccessKey}}",
+									"type": "string"
+								},
+								{
+									"key": "accessKey",
+									"value": "{{AccessKeyId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"BAR_TH_104\",\r\n    \"version\": \"2020-10\",\r\n    \"metadata\": {\r\n        \"dfa\": {\r\n            \"type_logement\": {\r\n                \"maison\": \"\\\\App\\\\Patterns\\\\PatternA\",\r\n                \"appartement\": \"\\\\App\\\\Patterns\\\\PatternA\"\r\n            }\r\n        },\r\n        \"mapping\": {\r\n            \"field1\": \"type_logement\",\r\n            \"field2\": \"efficacite_energetique\",\r\n            \"field3\": \"zone_climatique\",\r\n            \"field4\": \"surface_chauffee\"\r\n        }\r\n    },\r\n    \"attributes\": {\r\n        \"type_logement\": {\r\n            \"hint\": \"string\",\r\n            \"values\": [\"appartement\", \"maison\"]\r\n        },\r\n        \"surface_habitable\": {\r\n            \"hint\": \"number\"\r\n        },\r\n        \"zone_climatique\": {\r\n            \"hint\": \"string\",\r\n            \"values\": [\"H1\", \"H2\", \"H3\"]\r\n        },\r\n        \"surface_chauffee\": {\r\n            \"hint\": \"number\"\r\n        }\r\n    },\r\n    \"appartement\": {\r\n        \"operation_1\": {\r\n            \"^(10[2-9])$\": {\r\n                \"H1\": 24500,\r\n                \"H2\": 20100,\r\n                \"H3\": 13400\r\n            },\r\n            \"^(11[0-9])$\": {\r\n                \"H1\": 32200,\r\n                \"H2\": 26400,\r\n                \"H3\": 17600\r\n            },\r\n            \"^(1[2-8][0-9]|19[0-9]|[2-9][0-9]{2}|1000)$\": {\r\n                \"H1\": 39700,\r\n                \"H2\": 32500,\r\n                \"H3\": 21700\r\n            }\r\n        },\r\n        \"operation_2\": {\r\n            \"^([0-9]|[12][0-9]|3[0-4])$\": 0.5,\r\n            \"^(3[5-9]|[45][0-9])$\": 0.7,\r\n            \"^(6[0-9])$\": 1,\r\n            \"^(7[0-9]|8[0-9])$\": 1.2,\r\n            \"^(9[0-9]|10[0-9])$\": 1.5,\r\n            \"^(1[12][0-9]|130)$\": 1.9,\r\n            \"^(13[1-9]|1[4-9][0-9]|[2-9][0-9]{2}|1000)$\": 2.5\r\n        }\r\n    },\r\n    \"maison\": {\r\n        \"operation_1\": {\r\n            \"^(10[2-9])$\": {\r\n                \"H1\": 52700,\r\n                \"H2\": 43100,\r\n                \"H3\": 28700\r\n            },\r\n            \"^(11[0-9])$\": {\r\n                \"H1\": 66400,\r\n                \"H2\": 54400,\r\n                \"H3\": 36200\r\n            },\r\n            \"^(1[2-8][0-9]|19[0-9]|[2-9][0-9]{2}|1000)$\": {\r\n                \"H1\": 79000,\r\n                \"H2\": 65400,\r\n                \"H3\": 43600\r\n            }\r\n        },\r\n        \"operation_2\": {\r\n            \"^([0-9]|[1-5][0-9]|6[0-9])$\": 0.5,\r\n            \"^(7[0-9]|8[0-9])$\": 0.7,\r\n            \"^(9[0-9]|10[0-9])$\": 1,\r\n            \"^(1[12][0-9]|130)$\": 1.1,\r\n            \"^(13[1-9]|1[4-9][0-9]|[2-9][0-9]{2}|1000)$\": 1.6\r\n        }\r\n    }\r\n}\r\n\r\n"
+						},
+						"url": {
+							"raw": "http://{{url_cee}}/cee/",
+							"protocol": "http",
+							"host": [
+								"{{url_cee}}"
+							],
+							"path": [
+								"cee",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find a Cee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4cae1bd4-8256-4600-a1a2-5806bf1344f5",
+								"exec": [
+									"// Test status\r",
+									"pm.test(\"Find a cee sheet - test status\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test content\r",
+									"pm.test(\"Find a cee sheet - test content\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('name');\r",
+									"    pm.expect(jsonData).to.have.property('version');\r",
+									"    pm.expect(jsonData).to.have.property('metadata');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "awsv4",
+							"awsv4": [
+								{
+									"key": "region",
+									"value": "{{region}}",
+									"type": "string"
+								},
+								{
+									"key": "secretKey",
+									"value": "{{SecretAccessKey}}",
+									"type": "string"
+								},
+								{
+									"key": "accessKey",
+									"value": "{{AccessKeyId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{url_cee}}/cee/2020-10/BAR_TH_104",
+							"protocol": "http",
+							"host": [
+								"{{url_cee}}"
+							],
+							"path": [
+								"cee",
+								"2020-10",
+								"BAR_TH_104"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Simulate a Cee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae2dc3ed-1760-4b5e-90df-bc379c81b564",
+								"exec": [
+									"// Test status\r",
+									"pm.test(\"Simulate cumac - test status\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test content\r",
+									"pm.test(\"Simulate cumac - test content\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('cumac');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "awsv4",
+							"awsv4": [
+								{
+									"key": "region",
+									"value": "{{region}}",
+									"type": "string"
+								},
+								{
+									"key": "secretKey",
+									"value": "{{SecretAccessKey}}",
+									"type": "string"
+								},
+								{
+									"key": "accessKey",
+									"value": "{{AccessKeyId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type_logement\": \"maison\",\r\n    \"efficacite_energetique\": \"112\",\r\n    \"zone_climatique\": \"H2\",\r\n    \"surface_chauffee\": \"80\"\r\n}"
+						},
+						"url": {
+							"raw": "http://{{url_cee}}/cee/cumac/2020-10/BAR_TH_104",
+							"protocol": "http",
+							"host": [
+								"{{url_cee}}"
+							],
+							"path": [
+								"cee",
+								"cumac",
+								"2020-10",
+								"BAR_TH_104"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Cee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9a0c9673-ef55-4a9e-8de6-78452015819d",
+								"exec": [
+									"// Test status\r",
+									"pm.test(\"Delete a cee sheet - test status\", function(){\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "awsv4",
+							"awsv4": [
+								{
+									"key": "region",
+									"value": "{{region}}",
+									"type": "string"
+								},
+								{
+									"key": "secretKey",
+									"value": "{{SecretAccessKey}}",
+									"type": "string"
+								},
+								{
+									"key": "accessKey",
+									"value": "{{AccessKeyId}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{url_cee}}/cee/2020-10/BAR_TH_104",
+							"protocol": "http",
+							"host": [
+								"{{url_cee}}"
+							],
+							"path": [
+								"cee",
+								"2020-10",
+								"BAR_TH_104"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

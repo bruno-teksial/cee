@@ -1,0 +1,17 @@
+# Default values for dev.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+functions: 
+  - name: cee
+    instance: cee-fb93cdef80d8
+    component: faas
+    partOf: micro-services
+    version: v1.1
+    image: docker.pkg.github.com/teksial/cee/cee
+    path: "/cee"
+    env:
+      plain:
+        DB_URI: mongodb://root:root@192.168.65.10:27017
+        DB_NAME: cee
+        DB_COLLECTION: db

@@ -1,0 +1,11 @@
+# Ignore DevSpace cache and log folder
+.devspace/
+helm/
+src/vendor
+src/.phalcon
+src/cache
+src/bin
+src/.env
+src/tests/_output
+src/tests/_support/_generated
+values.yaml

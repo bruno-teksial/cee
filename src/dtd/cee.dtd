@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft/2019-09/schema#",
+
+    "type": "object",
+
+    "definitions": {
+        "property" : {
+            "type": "object",
+            "propertyNames": {
+                "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+            }
+        },
+        "metadata" : {
+            "type": "object",
+            "properties": {
+                "dfa": {
+                    "allOf": [
+                        {"$ref": "#/definitions/property"},
+                        {"minProperties": 1, "maxProperties": 1}
+                    ]
+                },
+                "mapping" : {"$ref": "#/definitions/property"}
+            },
+            "required": ["dfa", "mapping"],
+            "additionalProperties": false
+        }
+    },
+
+    "properties": {
+        "name": {"type": "string"},
+        "schema": {"type": "string"},
+        "version": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}$"},
+        "active": { "type": "string", "format": "date"},
+        "taxonomies": {"type": "string"},
+        "metadata": {"$ref": "#/definitions/metadata"},
+        "attributes": {"$ref": "#/definitions/property"},
+        "data": {"$ref": "#/definitions/property"}
+    },
+    "required": ["name", "schema", "version", "active", "taxonomies", "metadata", "attributes", "data"],
+    "additionalProperties": false
+
+}

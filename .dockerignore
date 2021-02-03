@@ -1,0 +1,8 @@
+# Ignore devspace.yaml file to prevent image rebuilding after config changes
+devspace.yaml
+.devspace
+docker-compose.yml
+.git/
+.gitignore
+helm/
+values.yaml

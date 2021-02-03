@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+
+  app:
+    build: 
+      context: .
+      target: test
+    volumes: 
+      - ./src:/var/www/html
+    env_file:
+      - ./src/.env.test
+    networks: 
+      - network
+      
+networks: 
+  network:

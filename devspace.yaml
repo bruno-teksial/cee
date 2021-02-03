@@ -1,0 +1,55 @@
+version: v1beta9
+images:
+  cee:
+    image: docker.pkg.github.com/teksial/cee/cee
+    createPullSecret: true
+    preferSyncOverRebuild: true
+    injectRestartHelper: true
+    appendDockerfileInstructions:
+    - USER root
+    entrypoint:
+      - php-fpm
+    dockerfile: ./Dockerfile
+    context: .
+    build:
+      docker:
+        preferMinikube: false
+        skipPush: false
+        options:
+          target: dev
+deployments:
+- name: cee-deployments
+  helm:
+    chart:
+      name: ../helm/functions
+    recreate: true
+    cleanupOnFail: true
+    componentChart: false
+    valuesFiles:
+      - values.yaml
+dev:
+  ports:
+  - imageName: cee
+    forward:
+    - port: 8081
+      remotePort: 80
+  open:
+  - url: http://0.0.0.0:8081
+  sync:
+  - imageName: cee
+    localSubPath: ./src/
+    excludePaths:
+    - .git/
+    uploadExcludePaths:
+    - devspace.yaml
+    onUpload:
+      restartContainer: true
+profiles:
+- name: production
+  patches:
+  - op: remove
+    path: images.app.injectRestartHelper
+  - op: remove
+    path: images.app.appendDockerfileInstructions
+  - op: remove
+    path: images.app.build.docker.options.target

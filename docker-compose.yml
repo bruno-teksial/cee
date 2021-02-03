@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+
+  app:
+    build: 
+      context: .
+      target: dev
+    volumes: 
+      - ./src:/var/www/html
+    env_file:
+      - ./src/.env
+    networks: 
+      - network 
+
+  server:
+    image: nginx:1.19.3-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - .docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks: 
+      - network
+
+  db:
+    image: mongo:4.4.2-bionic
+    environment:
+        - MONGO_INITDB_DATABASE=${DB_NAME}
+        - MONGO_INITDB_ROOT_USERNAME=${ROOT_USERNAME}
+        - MONGO_INITDB_ROOT_PASSWORD=${ROOT_PASSWORD}
+    networks: 
+      - network
+
+  initContainer:
+    image: mongo:4.4.2-bionic
+    depends_on: 
+        - db
+    command: >
+      sh -c "mongoimport --drop --jsonArray --collection cee --authenticationDatabase admin mongodb://root:root@db:27017/db /inventory.crud.json"
+    volumes:
+      - ./src/tests/data/db.json:/inventory.crud.json
+    networks: 
+      - network
+
+networks:
+    network:

@@ -1,0 +1,567 @@
+[{
+    "name": "BAR_EN_101",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "taxonomies": "ISOLATION,TOIT,[RAMPANTS_DE_TOITURE,COMBLES]",
+    "metadata": {
+        "dfa": {
+            "zone_climatique": {
+                "H1": "\\App\\Patterns\\PatternC",
+                "H2": "\\App\\Patterns\\PatternC",
+                "H3": "\\App\\Patterns\\PatternC"
+            }
+        },
+        "mapping": {
+            "field1": "zone_climatique",
+            "field2": "surface_isolant"
+        }
+    },
+    "attributes": {
+        "zone_climatique": {
+            "hint": "string",
+            "values": ["H1", "H2", "H3"]
+        },
+        "surface_isolant": {
+            "hint": "number"
+        }
+    },
+    "data": {
+        "zone_climatique": {
+            "H1": 1700,
+            "H2": 1400,
+            "H3": 900
+        }
+    }
+},
+{
+    "name": "BAR_EN_102",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "taxonomies": "ISOLATION,MURS,[INTERIEUR,EXTERIEUR]",
+    "metadata": {
+        "dfa": {
+            "zone_climatique": {
+                "H1": "\\App\\Patterns\\PatternD",
+                "H2": "\\App\\Patterns\\PatternD",
+                "H3": "\\App\\Patterns\\PatternD"
+            }
+        },
+        "mapping": {
+            "field1": "zone_climatique",
+            "field2": "energie_chauffage",
+            "field3": "surface_isolant"
+        }
+    },
+    "attributes": {
+        "zone_climatique": {
+            "hint": "string",
+            "values": ["H1", "H2", "H3"]
+        },
+        "energie_chauffage": {
+            "hint": "string",
+            "values": ["electricite", "combustible"]
+        },
+        "surface_isolant": {
+            "hint": "number"
+        }
+    },
+    "data": {
+        "zone_climatique": {
+            "H1": {
+                "electricite": 2400,
+                "combustible": 3800
+            },
+            "H2": {
+                "electricite": 2000,
+                "combustible": 3100
+            },
+            "H3": {
+                "electricite": 1300,
+                "combustible": 2100
+            }
+        }
+    }
+},
+{
+    "name": "BAR_EN_103",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "taxonomies": "ISOLATION,SOLS,[INTERIEUR,EXTERIEUR]",
+    "metadata": {
+        "dfa": {
+            "zone_climatique": {
+                "H1": "\\App\\Patterns\\PatternC",
+                "H2": "\\App\\Patterns\\PatternC",
+                "H3": "\\App\\Patterns\\PatternC"
+            }
+        },
+        "mapping": {
+            "field1": "zone_climatique",
+            "field2": "surface_isolant"
+        }
+    },
+    "attributes": {
+        "zone_climatique": {
+            "hint": "string",
+            "values": ["H1", "H2", "H3"]
+        },
+        "surface_isolant": {
+            "hint": "number"
+        }
+    },
+    "data": {
+        "zone_climatique": {
+            "H1": 1600,
+            "H2": 1300,
+            "H3": 900
+        }
+    }
+},
+{
+    "name": "BAR_EN_104",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "ISOLATION,FENETRE,[FEN_TOIT,FEN_STD]",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_EN_105",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "ISOLATION,TOITURES_TERRASSES",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_101",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "CHAUFFAGE,CHF_EAU,CHF_EAU_PV",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_104",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "taxonomies": "CHAUFFAGE,PAC,[PAC_AIR_EAU,PAC_EAU_EAU]",
+    "metadata": {
+        "dfa": {
+            "type_logement": {
+                "maison": "\\App\\Patterns\\PatternA",
+                "appartement": "\\App\\Patterns\\PatternA"
+            }
+        },
+        "mapping": {
+            "field1": "type_logement",
+            "field2": "efficacite_energetique",
+            "field3": "zone_climatique",
+            "field4": "surface_chauffee"
+        }
+    },
+    "attributes": {
+        "type_logement": {
+            "hint": "string",
+            "values": ["appartement", "maison"]
+        },
+        "surface_habitable": {
+            "hint": "number"
+        },
+        "zone_climatique": {
+            "hint": "string",
+            "values": ["H1", "H2", "H3"]
+        },
+        "surface_chauffee": {
+            "hint": "number"
+        }
+    },
+    "data": {
+        "appartement": {
+            "operation_1": {
+                "^(10[2-9])$": {
+                    "H1": 24500,
+                    "H2": 20100,
+                    "H3": 13400
+                },
+                "^(11[0-9])$": {
+                    "H1": 32200,
+                    "H2": 26400,
+                    "H3": 17600
+                },
+                "^(1[2-8][0-9]|19[0-9]|[2-9][0-9]{2}|1000)$": {
+                    "H1": 39700,
+                    "H2": 32500,
+                    "H3": 21700
+                }
+            },
+            "operation_2": {
+                "^([0-9]|[12][0-9]|3[0-4])$": 0.5,
+                "^(3[5-9]|[45][0-9])$": 0.7,
+                "^(6[0-9])$": 1,
+                "^(7[0-9]|8[0-9])$": 1.2,
+                "^(9[0-9]|10[0-9])$": 1.5,
+                "^(1[12][0-9]|130)$": 1.9,
+                "^(13[1-9]|1[4-9][0-9]|[2-9][0-9]{2}|1000)$": 2.5
+            }
+        },
+        "maison": {
+            "operation_1": {
+                "^(10[2-9])$": {
+                    "H1": 52700,
+                    "H2": 43100,
+                    "H3": 28700
+                },
+                "^(11[0-9])$": {
+                    "H1": 66400,
+                    "H2": 54400,
+                    "H3": 36200
+                },
+                "^(1[2-8][0-9]|19[0-9]|[2-9][0-9]{2}|1000)$": {
+                    "H1": 79000,
+                    "H2": 65400,
+                    "H3": 43600
+                }
+            },
+            "operation_2": {
+                "^([0-9]|[1-5][0-9]|6[0-9])$": 0.5,
+                "^(7[0-9]|8[0-9])$": 0.7,
+                "^(9[0-9]|10[0-9])$": 1,
+                "^(1[12][0-9]|130)$": 1.1,
+                "^(13[1-9]|1[4-9][0-9]|[2-9][0-9]{2}|1000)$": 1.6
+            }
+        }
+    }
+},
+{
+    "name": "BAR_TH_106",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "taxonomies": "CHAUFFAGE,CHAUFFAGE,CHAUDIERE_HPE",
+    "metadata": {
+        "dfa": {
+            "type_logement": {
+                "maison": "\\App\\Patterns\\PatternA",
+                "appartement": "\\App\\Patterns\\PatternD"
+            }
+        },
+        "mapping": {
+            "field1": "type_logement",
+            "field2": "zone_climatique",
+            "field4": "surface_chauffee"
+        }
+    },
+    "attributes": {
+        "type_logement": {
+            "hint": "string",
+            "values": ["appartement", "maison"]
+        },
+        "surface_habitable": {
+            "hint": "number"
+        },
+        "zone_climatique": {
+            "hint": "string",
+            "values": ["H1", "H2", "H3"]
+        },
+        "surface_chauffee": {
+            "hint": "number"
+        }
+    },
+    "data": {
+        "appartement": {
+            "operation_1": {
+                "^(10[2-9])$": {
+                    "H1": 24500,
+                    "H2": 20100,
+                    "H3": 13400
+                },
+                "^(11[0-9])$": {
+                    "H1": 32200,
+                    "H2": 26400,
+                    "H3": 17600
+                },
+                "^(1[2-8][0-9]|19[0-9]|[2-9][0-9]{2}|1000)$": {
+                    "H1": 39700,
+                    "H2": 32500,
+                    "H3": 21700
+                }
+            },
+            "operation_2": {
+                "^([0-9]|[12][0-9]|3[0-4])$": 0.5,
+                "^(3[5-9]|[45][0-9])$": 0.7,
+                "^(6[0-9])$": 1,
+                "^(7[0-9]|8[0-9])$": 1.2,
+                "^(9[0-9]|10[0-9])$": 1.5,
+                "^(1[12][0-9]|130)$": 1.9,
+                "^(13[1-9]|1[4-9][0-9]|[2-9][0-9]{2}|1000)$": 2.5
+            }
+        },
+        "maison": {
+            "operation_1": {
+                "^(10[2-9])$": {
+                    "H1": 52700,
+                    "H2": 43100,
+                    "H3": 28700
+                },
+                "^(11[0-9])$": {
+                    "H1": 66400,
+                    "H2": 54400,
+                    "H3": 36200
+                },
+                "^(1[2-8][0-9]|19[0-9]|[2-9][0-9]{2}|1000)$": {
+                    "H1": 79000,
+                    "H2": 65400,
+                    "H3": 43600
+                }
+            },
+            "operation_2": {
+                "^([0-9]|[1-5][0-9]|6[0-9])$": 0.5,
+                "^(7[0-9]|8[0-9])$": 0.7,
+                "^(9[0-9]|10[0-9])$": 1,
+                "^(1[12][0-9]|130)$": 1.1,
+                "^(13[1-9]|1[4-9][0-9]|[2-9][0-9]{2}|1000)$": 1.6
+            }
+        }
+    }
+},
+{
+    "name": "BAR_TH_107",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "CHAUFFAGE,CHAUFFAGE,CHAUDIERE_CO_HPE",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_110",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "REGULATION,[RADIATEUR_BT,RADIATEUR_BT]",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_112",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "CHAUFFAGE,CHF_BOIS,[POELE,FOYER_FERME]",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_113",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "CHAUFFAGE,CHF_BOIS,CHAUDIERE_BOIS",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_116",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "CHAUFFAGE,CHAUFFAGE,PLANCHER_CHF",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_117",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "REGULATION,ROBINET_THST",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_118",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "REGULATION,PROGRAM_INTERMITTENCE",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_125",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "VENTILATION,VMC_DOUBLE",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_127",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "VENTILATION,VMC_SIMPLE",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_129",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "CHAUFFAGE,PAC,PAC_AIR_AIR",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_131",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "CHAUFFAGE,CHAUFFAGE,ISOLATION_RESEAU_EAU_CHAUDE",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_148",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "CHAUFFAGE,CHF_EAU,CHF_EAU_THERMO",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_155",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "VENTILATION,[VMC_HYBRIDE,VENTILATION_HYB_HYDRO]",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_158",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "REGULATION,[RADIATEUR_ELEC,RADIATEUR_ELEC]",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAR_TH_159",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "CHAUFFAGE,PAC,PAC_HYBRIDE",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAT_TH_119",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "CHAUFFAGE,CHAUFFAGE,ISOLATION_RESEAU_EAU_CHAUDE_TERTIAIRE",
+    "attributes": "",
+    "data": ""
+},
+{
+    "name": "BAT_TH_140",
+    "schema": "1.0",
+    "version": "2020-10",
+    "active": {"$date":"2020-10-01T00:00:00Z"},
+    "metadata": {
+        "dfa": "",
+        "mapping": ""
+    },
+    "taxonomies": "CHAUFFAGE,PAC,PAC_ABSORPTION",
+    "attributes": "",
+    "data": ""
+}]
