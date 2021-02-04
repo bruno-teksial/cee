@@ -23,7 +23,7 @@ spec:
           name: nginx-conf
       containers:
       - name: server
-        image: nginx:1.19.3-alpine
+        image: nginx:1.18-perl
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
