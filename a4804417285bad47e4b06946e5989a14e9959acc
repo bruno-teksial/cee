@@ -1,0 +1,1 @@
+{"jobID":"ba666722-c63f-e82f-16fc-e616e8221202","spec":{"type":"policy","cause":{"Message":"","User":"Bruno Teksial \u003cbruno.teksial@gmail.com\u003e"},"spec":{"default:deployment/cee-v1-deployment":{"add":{"automated":"true"},"remove":{}}}},"result":null}
