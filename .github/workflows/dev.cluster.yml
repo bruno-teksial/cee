@@ -28,7 +28,7 @@ on:
 # Environment variables available to all jobs and steps in this workflow.
 env: 
   REGISTRY: docker.pkg.github.com
-  NAMESPACE: teksial
+  NAMESPACE: bruno-teksial
   IMAGE: cee/cee
   HELM_CHART_NAME: functions
   DOCKER_STAGING_TEST: test
@@ -46,17 +46,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    # 1.1 Build & Staging test
-    - name: Build and Test
-      run: |
-        docker build --tag image-temp --target "$DOCKER_STAGING_TEST" .
-
-    # 1.2 Build & Staging prod
-    - name: Build prod
-      run: |
-        docker build --tag image-temp --target "$DOCKER_STAGING_PROD" .
-
-    # 2.1 Semver strategy
+    # 1.1 Semver strategy
     - name: Bump version and push tag
       id: tag
       uses: anothrNick/github-tag-action@1.26.0
@@ -65,50 +55,31 @@ jobs:
         INITIAL_VERSION: 1.0
         RELEASE_BRANCHES: master
 
-    # 2.2 Tagging before push to registry
-    - name: Tagging
+    # 1.2 Build & Staging prod
+    - name: Build prod
       run: |
-        docker tag image-temp "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
+        docker build --tag "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}" --target "$DOCKER_STAGING_PROD" .
 
-    # 2.3 Push github packages
+    # 1.3 Push github packages
     - name: Login Github.com & Push
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com --username ${{ github.actor }} --password-stdin
         docker push "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
 
-  deploy:
-    needs: build
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-
-    # 3.1 Aws configure
-    - name: AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: "${{ env.REGION_ID }}"
-
-    # 3.2 Aws update kubeconfig
-    - name: Generate kubeconfig
-      id: kubeconfig
-      run: |
-        aws eks update-kubeconfig --name "${{ env.EKS_CLUSTER_NAME }}" --region "${{ env.REGION_ID }}"
-        echo "::set-output name=config-base64::$(cat ~/.kube/config | base64 | tr -d '\n\r')"
-      shell: bash
-
-    # 4.1 Get Helm Chart
-    - name: Checkout Helm Chart
+    # 1.4 Clone Manifest
+    - name: Checkout
       uses: actions/checkout@v2
       with:
-        repository: teksial/charts
+        repository: bruno-teksial/helm
+        ref: 'dev'
         path: charts
 
-    # 4.2 Deploy the image to the EKS cluster
-    - name: Helm deploy
-      uses: koslib/helm-eks-action@master
-      env:
-        KUBE_CONFIG_DATA: ${{ steps.kubeconfig.outputs.config-base64 }}
-      with:
-        command: helm upgrade "${{ env.IMAGE }}" ./charts/"${{ env.HELM_CHART_NAME }}" --install --create-namespace --wait --atomic --namespace="${{ env.EKS_NAMESPACE }}" --values=${{ secrets.CHARTS_VALUES }}
+    # 1.5 Search & Replace Image
+    - name: Update Image
+      run: |
+        ls -al
+        cp charts/cee/deployment.yaml tmp-deployment.yaml
+        sed -i 's/docker.pkg.github.com.*/docker.pkg.github.com\/bruno-teksial\/cee\/cee:1.13/' tmp-deployment.yaml
+        cat tmp-deployment.yaml
+
+
