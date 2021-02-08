@@ -86,7 +86,7 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_file: charts/cee/deployment.yaml
+        source_file: deployment.yaml
         destination_repo: bruno-teksial/helm
         destination_folder: charts/cee
         destination_branch: dev
