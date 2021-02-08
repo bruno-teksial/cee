@@ -90,6 +90,6 @@ jobs:
         destination_repo: bruno-teksial/helm
         destination_folder: charts/cee
         destination_branch: dev
-        user_email: 'bruno-teksial@gmail.com'
-        user_name: 'bruno-teksial'
+        user_email: 'bruno.teksial@gmail.com'
+        user_name: 'Bruno Teksial'
         # commit_message: "Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
