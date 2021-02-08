@@ -92,4 +92,4 @@ jobs:
         destination_branch: dev
         user_email: 'bruno-teksial@gmail.com'
         user_name: 'bruno-teksial'
-        commit_message: Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}
+        # commit_message: "Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
