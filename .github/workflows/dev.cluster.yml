@@ -79,17 +79,17 @@ jobs:
       run: |
         ESCAPE_IMAGE_NAME=${IMAGE//\//\\/}
         sed -i "s/$REGISTRY.*/$REGISTRY\/$NAMESPACE\/$ESCAPE_IMAGE_NAME:${{ steps.tag.outputs.tag }}/" charts/cee/deployment.yaml
-        cat charts/cee/deployment.yaml
 
-    # # 1.6 Copy file to another repo
-    # - name: Pushes test file
-    #   uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-    #   env:
-    #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-    #   with:
-    #     source_file: 'charts/cee/deployment.yaml'
-    #     destination_repo: 'dmnemec/release-test'
-    #     destination_folder: 'test-dir'
-    #     user_email: 'example@email.com'
-    #     user_name: 'dmnemec'
-    #     commit_message: 'A custom message for the commit'
+    # 1.6 Copy file to another repo
+    - name: Pushes test file
+      uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: charts/cee/deployment.yaml
+        destination_repo: bruno-teksial/helm
+        destination_folder: charts/cee
+        destination_branch: dev
+        user_email: 'bruno-teksial@gmail.com'
+        user_name: 'bruno-teksial'
+        commit_message: Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}
