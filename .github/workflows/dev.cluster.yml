@@ -70,6 +70,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo        
         repository: bruno-teksial/helm
         ref: 'dev'
         path: charts
@@ -80,16 +82,32 @@ jobs:
         ESCAPE_IMAGE_NAME=${IMAGE//\//\\/}
         sed -i "s/$REGISTRY.*/$REGISTRY\/$NAMESPACE\/$ESCAPE_IMAGE_NAME:${{ steps.tag.outputs.tag }}/" charts/cee/deployment.yaml
 
-    # 1.6 Copy file to another repo
-    - name: Pushes test file
-      uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+    - name: Commit files
+      run: |
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git commit -m "Add changes" -a
+
+    # # 1.6 Copy file to another repo
+    - name: Push changes
+      uses: ad-m/github-push-action@master
       with:
-        source_file: charts/cee/deployment.yaml
-        destination_repo: bruno-teksial/helm
-        destination_folder: charts/cee
-        destination_branch: dev
-        user_email: 'bruno.teksial@gmail.com'
-        user_name: 'Bruno Teksial'
-        # commit_message: "Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        repository: bruno-teksial/helm
+        branch: dev
+        force: true
+        directory: charts/cee
+
+    # # 1.6 Copy file to another repo
+    # - name: Pushes test file
+    #   uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+    #   env:
+    #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+    #   with:
+    #     source_file: charts/cee/deployment.yaml
+    #     destination_repo: bruno-teksial/helm
+    #     destination_folder: charts/cee
+    #     destination_branch: dev
+    #     user_email: 'bruno.teksial@gmail.com'
+    #     user_name: 'Bruno Teksial'
+    #     # commit_message: "Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
