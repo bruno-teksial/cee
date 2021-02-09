@@ -86,23 +86,20 @@ jobs:
     - name: Commit files
       run: |
         cd charts
-        touch toto.txt
-        git status
-        git add charts/cee/deployment.yaml
         git config --local user.email "bruno.teksial@gmailcom"
         git config --local user.name "Bruno Teksial"
         git commit -m "Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}" -a
 
 
-    # # 1.6 Copy file to another repo
-    # - name: Push changes
-    #   uses: ad-m/github-push-action@master
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     repository: bruno-teksial/helm
-    #     branch: dev
-    #     force: true
-    #     directory: charts
+    # 1.6 Copy file to another repo
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        repository: bruno-teksial/helm
+        branch: dev
+        force: true
+        directory: charts
 
     # # 1.6 Copy file to another repo
     # - name: Pushes test file
