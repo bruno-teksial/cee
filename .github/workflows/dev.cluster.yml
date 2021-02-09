@@ -87,8 +87,8 @@ jobs:
       run: |
         cd charts
         git config --list
-        git config --local user.email "bruno.teksial@gmailcom"
-        git config --local user.name "Bruno Teksial"
+        git config user.email "bruno.teksial@gmailcom"
+        git config user.name "Bruno Teksial"
         git commit -m "Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}" -a
         git config --list
 
