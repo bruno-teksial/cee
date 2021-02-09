@@ -55,16 +55,16 @@ jobs:
         INITIAL_VERSION: 1.0.0
         RELEASE_BRANCHES: master
 
-    # 1.2 Build & Staging prod
-    - name: Build prod
-      run: |
-        docker build --tag "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}" --target "$DOCKER_STAGING_PROD" .
+    # # 1.2 Build & Staging prod
+    # - name: Build prod
+    #   run: |
+    #     docker build --tag "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}" --target "$DOCKER_STAGING_PROD" .
 
-    # 1.3 Push github packages
-    - name: Login Github.com & Push
-      run: |
-        echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com --username ${{ github.actor }} --password-stdin
-        docker push "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
+    # # 1.3 Push github packages
+    # - name: Login Github.com & Push
+    #   run: |
+    #     echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com --username ${{ github.actor }} --password-stdin
+    #     docker push "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
 
     # 1.4 Clone Manifest
     - name: Checkout
@@ -88,7 +88,7 @@ jobs:
       with:
         source_file: charts/cee/deployment.yaml
         destination_repo: bruno-teksial/helm
-        destination_folder: charts/cee
+        destination_folder: cee
         destination_branch: dev
         user_email: 'bruno.teksial@gmail.com'
         user_name: 'Bruno Teksial'
