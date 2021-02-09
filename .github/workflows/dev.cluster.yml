@@ -46,7 +46,17 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    # 1.1 Semver strategy
+    # 1.1 Build & Staging test
+    - name: Build and Test
+      run: |
+        docker build --tag image-temp --target "$DOCKER_STAGING_TEST" .
+
+    # 1.2 Build & Staging prod
+    - name: Build prod
+      run: |
+        docker build --tag image-temp --target "$DOCKER_STAGING_PROD" .
+
+    # 2.1 Semver strategy
     - name: Bump version and push tag
       id: tag
       uses: anothrNick/github-tag-action@1.26.0
@@ -55,30 +65,30 @@ jobs:
         INITIAL_VERSION: 1.0.0
         RELEASE_BRANCHES: master
 
-    # # 1.2 Build & Staging prod
-    # - name: Build prod
-    #   run: |
-    #     docker build --tag "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}" --target "$DOCKER_STAGING_PROD" .
+    # 2.2 Tagging before push to registry
+    - name: Tagging
+      run: |
+        docker tag image-temp "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
 
-    # # 1.3 Push github packages
-    # - name: Login Github.com & Push
-    #   run: |
-    #     echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com --username ${{ github.actor }} --password-stdin
-    #     docker push "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
-
-    # 1.4 Clone Manifest
-    - name: Checkout
+    # 2.3 Push github packages
+    - name: Login Github.com & Push
+      run: |
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com --username ${{ github.actor }} --password-stdin
+        docker push "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
+        
+    # 3.1 Clone Manifest
+    - name: Clone git manifests
       uses: actions/checkout@v2
       with:
         repository: bruno-teksial/helm
         ref: 'dev'
         path: charts
 
-    # 1.5 Search & Replace Image
+    # 1.5 Search & Replace Image in chart
     - name: Update Image
       run: |
         ESCAPE_IMAGE_NAME=${IMAGE//\//\\/}
-        sed -i "s/$REGISTRY.*/$REGISTRY\/$NAMESPACE\/$ESCAPE_IMAGE_NAME:${{ steps.tag.outputs.tag }}/" charts/cee/deployment.yaml
+        sed -i "s/$REGISTRY.*/$REGISTRY\/$NAMESPACE\/$ESCAPE_IMAGE_NAME:${{ steps.tag.outputs.tag }}/" charts/cee/values.yaml
 
     # 1.6 Copy file to another repo
     - name: Pushes test file
@@ -86,7 +96,7 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_file: charts/cee/deployment.yaml
+        source_file: charts/cee/values.yaml
         destination_repo: bruno-teksial/helm
         destination_folder: cee
         destination_branch: dev
