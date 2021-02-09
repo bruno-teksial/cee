@@ -86,7 +86,7 @@ jobs:
       run: |
         cd charts
         git config --local user.email "bruno.teksial@gmailcom"
-        git config --local user.name "github-actions[bot]"
+        git config --local user.name "Bruno Teksial"
         git commit -m "Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}" -a
 
     # # 1.6 Copy file to another repo
