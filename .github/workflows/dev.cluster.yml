@@ -55,23 +55,21 @@ jobs:
         INITIAL_VERSION: 1.0.0
         RELEASE_BRANCHES: master
 
-    # # 1.2 Build & Staging prod
-    # - name: Build prod
-    #   run: |
-    #     docker build --tag "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}" --target "$DOCKER_STAGING_PROD" .
+    # 1.2 Build & Staging prod
+    - name: Build prod
+      run: |
+        docker build --tag "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}" --target "$DOCKER_STAGING_PROD" .
 
     # 1.3 Push github packages
-    # - name: Login Github.com & Push
-    #   run: |
-    #     echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com --username ${{ github.actor }} --password-stdin
-    #     docker push "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
+    - name: Login Github.com & Push
+      run: |
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com --username ${{ github.actor }} --password-stdin
+        docker push "$REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
 
     # 1.4 Clone Manifest
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        # persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo        
         repository: bruno-teksial/helm
         ref: 'dev'
         path: charts
@@ -81,38 +79,17 @@ jobs:
       run: |
         ESCAPE_IMAGE_NAME=${IMAGE//\//\\/}
         sed -i "s/$REGISTRY.*/$REGISTRY\/$NAMESPACE\/$ESCAPE_IMAGE_NAME:${{ steps.tag.outputs.tag }}/" charts/cee/deployment.yaml
-        cat charts/cee/deployment.yaml
-
-    - name: Commit files
-      run: |
-        cd charts
-        git config --list
-        git config user.email "bruno.teksial@gmailcom"
-        git config user.name "Bruno Teksial"
-        git commit -m "Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}" -a
-        git config --list
-
 
     # 1.6 Copy file to another repo
-    - name: Push changes
-      uses: ad-m/github-push-action@master
+    - name: Pushes test file
+      uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        github_token: ${{ secrets.API_TOKEN_GITHUB }}
-        repository: bruno-teksial/helm
-        branch: dev
-        force: true
-        directory: charts
-
-    # # 1.6 Copy file to another repo
-    # - name: Pushes test file
-    #   uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-    #   env:
-    #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-    #   with:
-    #     source_file: charts/cee/deployment.yaml
-    #     destination_repo: bruno-teksial/helm
-    #     destination_folder: charts/cee
-    #     destination_branch: dev
-    #     user_email: 'bruno.teksial@gmail.com'
-    #     user_name: 'Bruno Teksial'
-    #     # commit_message: "Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
+        source_file: charts/cee/deployment.yaml
+        destination_repo: bruno-teksial/helm
+        destination_folder: charts/cee
+        destination_branch: dev
+        user_email: 'bruno.teksial@gmail.com'
+        user_name: 'Bruno Teksial'
+        # commit_message: "Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}"
