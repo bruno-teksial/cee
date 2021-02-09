@@ -84,9 +84,10 @@ jobs:
 
     - name: Commit files
       run: |
+        cd charts
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git commit -m "Add changes" -a
+        git commit -m "Update Image $REGISTRY/$NAMESPACE/$IMAGE:${{ steps.tag.outputs.tag }}" -a
 
     # # 1.6 Copy file to another repo
     - name: Push changes
@@ -96,7 +97,7 @@ jobs:
         repository: bruno-teksial/helm
         branch: dev
         force: true
-        directory: charts/cee
+        directory: charts
 
     # # 1.6 Copy file to another repo
     # - name: Pushes test file
